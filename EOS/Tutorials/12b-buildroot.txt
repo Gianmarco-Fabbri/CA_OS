@@ -1,0 +1,56 @@
+4 elements of embedded linux
+
+Toolchain
+bootloader
+kernel
+rootfilesystem
++
+one more element can be doman specific application
+
+
+Input data -> description of what we want (kernel configuration, Hardware type, packages/binaries)
+
+output -> Linux based mebedded products
+	(linux kernel, root filesystem, bootloader, device tree)
+
+
+
+Linux boot requirement
+RBL -> ROM boot loader (very tiny bootloader)
+	1- very first piece of code to run on the SoC on power on
+	2- written by vendor and stored in ROM during production, can't be changed (source code not availability, very limited functionalities)
+	3- major job, load and execute the second stage bootloader from internal storage (SPL/ML0)
+
+SPL -> load the third stage bootloader (U-boot)
+	1- driven from U-boot
+
+U-boot -> loading the kernel
+
+
+buildroot 
+	1- build tools - mandatory packages
+		1.1- https://buildroot.org/downloads/manual/manual.html#requirement-mandatory
+
+	2- in buildroot directory
+		2.1- make menuconfig || make nconfig (curser-based configurator) || make xconfig (new curser-based configurator) || make gconfig
+		2.2- For each menu entry in the configuration tool, you can find associated help that describes the purpose of the entry
+		2.3- onfiguration tool generates a .config
+		2.4- will be read by the top-level Makefile
+	3- build
+		3.1- type "make"
+		3.2- no support for parallel build by def -> "https://buildroot.org/downloads/manual/manual.html#top-level-parallel-build"
+		3.3- The make command will generally perform the following steps:
+		3.3.1- download source files (as required);
+		3.3.2- configure, build and install the cross-compilation toolchain, or simply import an external toolchain;
+		3.3.3- configure, build and install selected target packages;
+		3.3.4- build a kernel image, if selected;
+		3.3.5- build a bootloader image, if selected;
+		3.3.6- create a root filesystem in selected formats.
+	4- output is stored in a single directory, output/
+		4.1- images/ where all the images (kernel image, bootloader and root filesystem images) are stored. These are the files you need to put on your target system
+
+Check the following parts of buildroot documentation for more insight
+	1- https://buildroot.org/downloads/manual/manual.html#_details_about_packages
+	2- https://buildroot.org/downloads/manual/manual.html#init-system
+	3- https://buildroot.org/downloads/manual/manual.html#_how_buildroot_works
+

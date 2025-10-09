@@ -1,0 +1,66 @@
+1- running linux machine (prefereably Debian/Ubuntu based)
+2- apt install gcc-arm-linux-gnueabi
+	2.1 - check your distro installation guid
+	2.2 - needs root access
+	2.3 - should be avaialble in PATH environment variable
+3-  install qemu-system-arm package
+4- write a test program & compile (main.c)
+5- arm-linux-gnueabi-gcc main.c -o test
+6- file test
+	6.1 - "test: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.3, for GNU/Linux 3.2.0, BuildID[sha1]=2bf38f2c75d90391b4ec5aa4eac3cb2f041a15ee, not stripped"
+7- get sources for our Linux
+	7.1 - kernel.org (download from)
+	7.2 - grab stable release (current stable 6.12.1)
+8- get BusyBox
+	8.1 - busybox.net
+	8.2 - grab stable release (current stable 1.36.1)
+9- Extract archives
+	9.1 - tar xf linux-6.12.1.tar.xz
+	9.2 - tar xf busybox-1.36.1.tar.bz2
+10- Building ARM linux kernel
+	10.1 - default configuration for qemu (quickest)
+	10.2 - To cross-compile linux
+		10.2.1 - Target architecture (in our case ARM)
+		10.2.2 - cross compiler name prefix (e.g. arm-linux-gnueabi-)
+11- intall following (if not available in your system)
+	11.1 - sudo apt install -y flex
+	11.2 - sudo apt install -y bison
+12- make default config
+	12.1 - cd linux-4.6.3
+	12.2 - make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- versatile_defconfig
+	12.3 - compile ( provide the prefix of gcc cross compiler only!)
+		12.3.1 - make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi-
+13- Test kernel
+	13.1 -  qemu-system-arm -M versatilepb -kernel arch/arm/boot/zImage -dtb arch/arm/boot/dts/arm/versatile-pb.dtb -serial mon:stdio -append "console=ttyAMA0" -nographic
+	13.2 - argumets to qemu:
+		   (1) -M – the board name, qemu is able to simulate several different boards but our kernel is especially customized for this one. We have provided this defconfig when configuring the kernel.
+		   (2) -kernel – the kernel binary itself
+		   (3) -dtb – device tree for the board, I can discus this file on another occasion, but assume that it’s mandatory to boot the system
+           (4) -serial – where the console should be printed, we want it on stdio.
+           (5) -append – append additional kernel command line arguments. We need to inform kernel where to print stuff by default. We want it to be ttyAMA0 device (first serial port)
+    13.3 - You should see the kernel booting and finally… kernel panic
+    	   "Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0) CPU: 0 PID: 1 Comm: swapper Not tainted 4.6.3 #1 Hardware name: ARM-Versatile (Device Tree Support)"
+14- Configure busybox
+	14.1 - cd ../busybox-1.36.1
+	14.2 - make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- defconfig
+	14.3 - sudo apt-get install libncurses5-dev libncursesw5-dev
+	14.4 - "make menuconfig" -> Navigating to Busybox Settings -> Build Options and checking “Build BusyBox as a static binary (no shared libs)” option & all the options in "Network Utilities"
+	14.5 - make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi-
+	14.6 - make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- install
+15- Create rootfs
+	15.1 - "mkdir rootfs"
+	15.2 - creat a file named "init" inside the rootfs directory and input as following:
+
+			#!/bin/sh
+			mount -t proc none /proc
+			mount -t sysfs none /sys
+			mknod -m 660 /dev/mem c 1 1
+			echo -e "\nHello!\n"
+			exec /bin/sh
+
+	15.3 - setup permission for it "chmod u+x"
+	15.4 - copy the busybox generated files to rootfs -> "cp -av busybox-1.36.1/_install/* rootfs/"
+	15.5 - make the standard rootfs directory structure -> "mkdir -pv rootfs/{bin,sbin,etc,proc,sys,usr/{bin,sbin}}"
+	15.6 - creat the rootfs archive -> "find . -print0 | cpio --nul -ov --format=newc | gzip -9 > rootfs.cpio.gz"
+16- test the created embedded linux (enjoy! ;))
+	16.1 - qemu-system-arm -M versatilepb -kernel linux-6.12.1/arch/arm/boot/zImage -dtb linux-6.12.1/arch/arm/boot/dts/arm/versatile-pb.dtb -initrd rootfs.cpio.gz -serial stdio -append "root=/dev/mem serial=ttyAMA0"
