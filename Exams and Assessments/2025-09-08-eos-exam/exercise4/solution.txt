@@ -1,0 +1,25 @@
+1. Explain what it is meant for "hit ratio".
+
+
+
+2. What is the size of a page in this system?
+
+
+
+3. How many pages are there in the virtual address space?
+
+
+
+4. How many entries are needed in each level of the page table?
+
+
+
+5. Calculate the size (in Bytes) of the full page table for a process using 100MB of virtual address space (assume it fully uses those 100MB).
+
+
+
+6. Determine the external fragmentation and internal fragmentation (worst case and average case) and the fragmentation of a process P1 of size 71 MB.
+
+
+
+6. Compute the Effective Access Time (EAT) considering the hit ratio and memory access cost.

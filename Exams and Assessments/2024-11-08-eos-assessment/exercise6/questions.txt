@@ -1,0 +1,43 @@
+
+
+Question 1
+==========
+Consider a CPU with a 3 stages pipeline each executing an operation in t seconds. How do you compute the toal execution time of a sequence of 100 operation in the hypotesis that the pipeline never stalls?
+<Write here your answer>
+
+
+Question 2
+==========
+In a microkernel can you explain how a system call that requires the use of the file system is implemented? The filesystem is executed in user space.
+
+<Write here your answer>
+
+Question 3
+==========
+Which are the main differences between a microprocessor and a microcontroller?
+
+<Write here your answer>
+
+
+Question 4
+==========
+<Place an [X] for the correct answer>
+
+What is the main distinction between hard and soft real-time systems?
+
+[ ] Hard real-time systems guarantee the timeliness of tasks, while soft real-time systems allow occasional missed deadlines.
+[ ] Hard real-time systems prioritize task order over timing, while soft real-time systems prioritize timing.
+[ ] Hard real-time systems require high performance, while soft real-time systems do not.
+[ ] Hard real-time systems operate with real hardware, while soft real-time systems operate in a simulated environment.
+
+
+Question 5
+==========
+<Place an [X] for the correct answer>
+
+
+Which of the following statements about race conditions is true?
+[ ] Race conditions always lead to system crashes.
+[ ] Race conditions only occur in single-threaded applications.
+[ ] Race conditions are difficult to reproduce because the timing of thread execution can vary.
+[ ] Race conditions are only a concern in real-time systems.

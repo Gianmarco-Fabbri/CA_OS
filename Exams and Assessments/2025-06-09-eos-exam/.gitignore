@@ -1,0 +1,17 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two carriage returns
+Icon
+
+# macOS folder attributes
+._*
+
+# macOS metadata files
+.Spotlight-V100
+.Trashes
+.VolumeIcon.icns
+.fseventsd
+.com.apple.timemachine.donotpresent

@@ -1,0 +1,23 @@
+1. Conditions Required for Scheduling (EDF)
+-------------------------------------------
+We should have the sum of C_i / T_i over i < 1
+
+2. EDF Feasibility Check
+------------------------
+25/50 + 35/80 = 0,9375 < 1  => the algorithm is feasible
+
+3. Simulation
+------------------------
+
+Replace --- with XXX to indicate that a task is running in an interval
+
+
+       0   5  10  15  20  25  30  35  40  45  50  55  60  65  70  75  80  85  90  95  100 105 110 120 125 130 135 140 145 145 150 155 160
+       |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+
+       ^                                       ^                                       ^                                       ^
+P1.    |XXX|XXX|XXX|XXX|XXX|---|---|---|---|---|---|---|XXX|XXX|XXX|XXX|XXX|---|---|---|XXX|XXX|XXX|XXX|XXX|---|---|---|---|---|XXX|XXX|
+
+       ^                                                               ^                                                               ^
+P2.    |---|---|---|---|---|XXX|XXX|XXX|XXX|XXX|XXX|XXX|---|---|---|---|XXX|XXX|XXX|XXX|---|---|---|---|---|XXX|XXX|XXX|---|---|---|---|
+

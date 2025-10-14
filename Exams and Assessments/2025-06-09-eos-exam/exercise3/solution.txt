@@ -1,0 +1,70 @@
+# Exercise 4 - Memory Management
+
+
+1. Second Chance Algorithm – Brief Explanation
+----------------------------------------------
+The Second Chance (Clock) algorithm is a modification of FIFO page allocation:
+- Pages are maintained in a circular queue (like a clock).
+- Each page has a reference bit (initially 0).
+- When a page is accessed:
+	* If it’s already in memory -> set its reference bit to 1.
+	* If it’s not in memory -> page fault. 
+	  If there is a free memory frame, use it and put it at the end of the FIFO. 
+	  If not, search the page to swap starting from the beginning of the FIFO:
+	  - If the page’s reference bit is 0 -> replace it.
+	  - If it’s 1 -> give it a "second chance": set it to 0, move the pointer to the next frame, repeat.
+	  - The pointer moves like a clock hand.
+
+
+2. Calculate Page Numbers
+-------------------------
+
+Page size = 4 KB = 4096 bytes
+So, page number = floor(address / 4096)
+
+Address		Page Number
+1050		0
+8195		2
+16384		4
+24576		6
+8192		2
+12345		3
+8195		2
+16400		4
+24576		6
+12350		3
+8192		2
+12345		3
+24575		5
+
+3. Simulate Second Chance Algorithm
+-----------------------------------
+
+Initial state:
+
+- 4 frames, all empty
+- Pointer = Frame 0
+- Reference bits = all 0
+
+Step	Addr	Page	Action		Frame State	Ref Bits	Pointer	Page Fault
+1	1050	0	Load page 0	[0 _ _ _]	[0 0 0 0]	1	Yes
+2	8195	2	Load page 2	[0 2 _ _]	[0 0 0 0]	2	Yes
+3	16384	4	Load page 4	[0 2 4 _]	[0 0 0 0]	3	Yes
+4	24576	6	Load page 6	[0 2 4 6]	[0 0 0 0]	0	Yes
+5	8192	2	Hit 		[0 2 4 6]	[0 1 0 0]	0	No
+6	12345	3	Replace page 0	[3 2 4 6]	[0 1 0 0]	1	Yes
+7	8195	2	Hit		[3 2 4 6]	[0 1 0 0]	1	No
+8	16400	4	Hit		[3 2 4 6]	[0 1 1 0]	1	No
+9	24576	6	Hit		[3 2 4 6]	[0 1 1 1]	1	No
+10	12350	3	Hit		[3 2 4 6]	[1 1 1 1]	1	No
+11	8192	2	Hit		[3 2 4 6]	[1 1 1 1]	1	No
+12	12345	3	Hit		[3 2 4 6]	[1 1 1 1]	1	No
+13	24575	5	Replace page 2 [3 5 4 6]	[0 0 0 0]	2	Yes
+
+
+4. Total Number of Page Faults
+
+Total: 6 page faults
+
+
+

@@ -1,0 +1,52 @@
+Question 1
+==========
+<Place an [X] for the correct answer>
+
+Which of the following best describes the difference between basic tasks and periodic tasks in a Real-Time Operating System (RTOS)?
+[ ] Basic tasks run continuously in a loop, while periodic tasks are executed only once during system startup.
+[X] Basic tasks are triggered by external interrupts, while periodic tasks are triggered by a timer at regular intervals.
+[ ] Basic tasks have higher priority than periodic tasks in all scheduling policies.
+[ ] Basic tasks must always be completed before periodic tasks can start.
+
+
+Question 2
+==========
+<Place an [X] for the correct answer>
+
+Which of the following statements about the ELF file format is correct?
+[ ] The ELF file format is used only by Windows executables and libraries.
+[ ] ELF files contain only source code and are not used during linking or execution.
+[X] ELF files are structured into headers, sections, and segments to support linking, loading, and execution.
+[ ] An ELF file always contains debugging symbols and high-level language constructs.
+
+Question 3
+==========
+<Place an [X] for the correct answer>
+
+What is virtual memory in a computer system?
+[ ] A storage area used to store temporary data during program execution.
+[ ] A type of memory that is physically installed in the computer hardware.
+[X] An abstraction layer that provides each process with its own isolated memory space.
+[ ] A technique used to compress data to reduce memory usage.
+
+
+Question 4
+==========
+<Place an [X] for the correct answer>
+
+In a real-time OS, which of the following statements about interrupt latency is true?
+[ ] Interrupt latency is the time taken to process an interrupt completely.
+[X] Interrupt latency is the time taken from when an interrupt is triggered until it starts execution.
+[ ] Interrupt latency does not impact system performance.
+[ ] Real-time OS does not allow interrupts to be preempted.
+
+
+Question 5
+==========
+<Place an [X] for the correct answer>
+
+What is a hard real-time system?
+[X] A system where tasks have strict deadlines and missing a deadline can cause system failure
+[ ] A system that prioritizes throughput over deadline constraints
+[ ] A system where tasks execute as soon as possible, without strict timing guarantees
+[ ] A system where the CPU is always fully utilized

@@ -1,0 +1,30 @@
+2.1. preemptive and non-preemptive
+
+
+
+2.2. Round-Robin
+
+2.2.1. Gantt chart
+
+Replace --- with XXX to indicate that a task is running in an interval.
+
+
+    0   5  10  15  20  25  30  35  40  45  50  55  60  65  70  75  80
+IDLE|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+P1  |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+P2  |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+P3  |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+P4  |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+
+
+
+
+2.2.2. What is the turnaround time for each process?
+
+
+
+2.2.3. What is the waiting time for each process?
+
+
+
+2.2.4. Cosidering the waiting times, what is the main problem of this scheduling algorithm?
