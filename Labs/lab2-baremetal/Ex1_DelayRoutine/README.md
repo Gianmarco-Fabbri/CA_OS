@@ -15,7 +15,8 @@ To implement the delay routine, you need the following information:
 2. The number of clock cycles each loop iteration takes.
 3. The desired delay time.
 
-With this information, you can calculate the number of iterations required to achieve the desired delay time.
+With this information, you can calculate the number of iterations 
+required to achieve the desired delay time.
 
 **Loop Counter = (Delay [s] × Clock Frequency [Hz]) / Clock Cycles per Iteration**
 
